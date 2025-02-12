@@ -1,0 +1,271 @@
+---
+title: "Maximality  Experiment: v2022"
+format: pdf
+editor: visual
+---
+
+## Object NPs
+
+### Methods and Design
+
+This experiment is an acceptability-judment task. Participants were shown short videos: one where the woman brought in five bags, put all of them on the table, and left (illustrating the maximal interpretation), and another one where the woman brought in five bags, put three of them on the table and one on the floor and left with one (illustrating the non-maximal condition). Participants were asked a question "What did the woman put on the table?" and asked to rate the response "The woman put the bags/bags on the table" on a scale from 1 to 10.
+
+The variables of interest were the following:
+
+-   `ResponseId` - a participant's unique ID,
+-   `Rate` - a numeric rate from 1 to 10 chosen by the participant
+-   `Context` with two levels: maximal and non-maximal, corresponding to the video shown
+-   `Definiteness` with three levels: Russian bare plurals, English definite plurals, and English bare plurals.
+
+The English experiment had two experimental lists. After the removal of inadequate responses, we had 30 participants for List 1 and 27 participants for List 2.
+
+The Russian experiment had 1 experimental list and 23 participants after the removal of inedaquate responses.
+
+The small number of participants and the fact that we only compared two videos restricted our options of statistical analysis.
+
+## Results visualization
+
+The results are represented below. As we can see, all the three types of plural NPs received unanimous maximal rates in the maximal conditions. We see some differences in the non-maximal condition. The yellow boxplot represents the interquartile range of the rates (Q1-Q3), or the middle 50% of the data. The black whiskers extend to 1.5\*IQR. The bold line within the box is the median, and the pink diamond point is the mean. The blue whiskers around the mean represent the standard error around the mean.
+
+```{r, echo=FALSE, message=FALSE, fig.show='hold', results='hide'}
+library(tidyverse)
+library(rstatix)
+library(stringr)
+library(lme4)
+library(emmeans)
+library(Hmisc)
+library(lm.beta)
+library(ggeffects)
+
+part1_eng <- read.csv("objectsEnglishPart1.csv")
+part1_eng <- part1_eng[-c(1:2,33),] %>% 
+  select(ResponseId, starts_with("exp"), starts_with("f")) %>%
+  mutate(part = 'Part 1', language = 'English')
+
+part2_eng <- read.csv("objectsEnglishPart2.csv")
+part2_eng <- part2_eng[c(3:11, 13:32),] %>%
+  select(ResponseId, starts_with("exp"), starts_with("f")) %>%
+  mutate(part = 'Part 2', language = 'English')
+
+part1_eng <- part1_eng %>% 
+  pivot_longer(cols = ((starts_with("exp"))|(starts_with("f"))),
+               names_to = 'Stimulus',
+               values_to = 'Rate')
+
+part2_eng <- part2_eng %>% 
+  pivot_longer(cols = ((starts_with("exp"))|(starts_with("f"))),
+               names_to = 'Stimulus',
+               values_to = 'Rate')
+
+eng <- rbind(part1_eng, part2_eng)
+
+eng$Rate <- as.numeric(eng$Rate)
+eng <- eng %>% 
+  mutate(ItemType = ifelse(grepl("^exp", Stimulus), "experimental", "filler")) %>%
+  filter(Stimulus != 'Finished')
+
+#Filtering fillers
+
+fillers_eng <- eng %>% filter(ItemType == 'filler')
+
+fillers_eng <- fillers_eng %>% 
+  mutate(fillerNumber = str_extract(Stimulus, "^f\\d+"),  
+    fillerValue = str_extract(Stimulus, "(good|bad)"))
+
+#identifying those who failed more than 3/5 good or more than 3/5 bad fillers 
+violators <- fillers_eng %>%
+  group_by(ResponseId) %>%
+  summarise(
+    good_filler_low = sum(fillerValue == "good" & Rate <= 3),
+    bad_filler_high = sum(fillerValue == "bad" & Rate >= 7)
+  ) %>%
+  filter(good_filler_low > 3 | bad_filler_high > 3)    
+
+#filtering the English dataset so that the violators are not there
+
+eng_exp <- eng %>% 
+  filter(!(ResponseId %in% violators$ResponseId), ItemType == 'experimental') 
+
+eng_exp <- eng_exp %>%
+  separate(Stimulus, into = c("Item", "Context", "Number", "Definiteness", "Other"), sep = "_") %>%
+  select(-Other) 
+
+#filtering to plural 
+eng_pl <- eng_exp %>% filter(Number == 'pl', (Context == 'max')|(Context == 'nmax'))
+
+eng_pl %>% 
+  group_by(Context, Definiteness) %>%
+  get_summary_stats(Rate, type = 'full')
+
+#Now Russian
+rus <- read.csv("objectsRussian.csv")
+
+rus <- rus[-c(1:2,7,29, 31),] %>%
+  select(ResponseId, starts_with("exp"), starts_with("f")) %>%
+  mutate(part = 'NA', language = 'Russian')
+
+rus <- rus %>% pivot_longer(
+  cols = ((starts_with("exp"))|(starts_with("f"))),
+  names_to = 'Stimulus',
+  values_to = 'Rate') %>%
+  mutate(ItemType = 
+           ifelse(grepl("^exp", Stimulus), 
+                  "experimental", "filler")) %>%
+  filter(Stimulus != 'Finished')
+rus$Rate <- as.numeric(rus$Rate)
+
+rus_exp <- rus %>% filter(ItemType == 'experimental')
+fillers_rus <- rus %>% filter(ItemType == 'filler') %>%
+  mutate(fillerNumber = str_extract(Stimulus, "^f\\d+"),  
+       fillerValue = str_extract(Stimulus, "(good|bad)"))
+
+#identifying those who failed more than 3/5 good or more than 3/5 bad fillers 
+violators_rus <- fillers_rus %>%
+  group_by(ResponseId) %>%
+  summarise(
+    good_filler_low = sum(fillerValue == "good" & Rate <= 3),
+    bad_filler_high = sum(fillerValue == "bad" & Rate >= 7)
+  ) %>%
+  filter(good_filler_low > 3 | bad_filler_high > 3)    
+
+rus_exp <- rus_exp %>%
+  filter(!(ResponseId %in% violators_rus$ResponseId))
+
+rus_exp <- rus_exp %>%
+  mutate(Stimulus = ifelse(Stimulus == 'exp9_1', 'exp9_uniq_pl_1', Stimulus))
+
+rus_exp <- rus_exp %>% separate(Stimulus, into = c("Item", "Context", "Number", "Definiteness"), sep = "_") %>%
+  mutate(Definiteness = 'bare') 
+
+rus_pl <- rus_exp %>% filter(Number == 'pl', ((Context == 'max')|(Context == 'nmax')))
+rus_pl <- na.omit(rus_pl)
+
+df <- rbind(eng_pl, rus_pl)
+df$Definiteness <- factor(df$Definiteness, levels = c("bare", "indef", "def"))
+new_context_labels <- c("max" = "Maximal Condition", "nmax" = "Non-Maximal Condition")
+ggplot(df, aes(x = Definiteness, y = Rate, fill = Definiteness)) +
+  geom_boxplot(outlier.shape = NA, width = 0.5, fill = 'darkgoldenrod1') +  
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 4, color = 'deeppink2') +  # Add mean points
+  stat_summary(fun.data = mean_se, geom = "errorbar", color = "blue", width = 0.2) +  # Add error bars for mean ± SE
+  facet_wrap(~Context, labeller = labeller(Context = new_context_labels), nrow = 2) +  
+ scale_x_discrete(labels = c('Russian bare PL', 'English bare PL', 'English definite PL')) + 
+  labs(
+    title = "Obtained Rates by Context",
+    subtitle = 'Plural Object NPs in Russian vs. English',
+    x = NULL,
+    y = "Rate"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none",
+        axis.text.x = element_text(hjust = 0.5))
+
+```
+
+## Russian
+
+A simple regression was conducted to assess the relationship between the acceptability of Russian bare plurals and context (maximal vs. non-maximal). The model formula was `Rate ~ Context`. Due to the small sample size, including `ResponseId` as a random effect led to singularity problems for the model. The results showed that the acceptability of Russian bare plurals is significantly associated with (non-)maximality, with rates for Russian bare plurals differing between the two conditions, F(1, 43) = 40.14, p \< .001. The mean rate for the for the maximal context was 10 (SD = 0), whereas in the non-maximal context, the mean rate was 6.52 (SD = 2.57). On average, bare plurals in the non-maximal context were rated 3.47 points lower than in the maximal context (SE = 0.55, p \< .001). The standardized beta coefficient of -0.69 suggests a large effect size. This model explains about 48% of the variance in the rates, which indicates a reasonably good fit for a simple statistical model. The residuals of the model were not normally distributed, but the large sample size (n = 230) accounts for non-normality.
+
+The following plot illustrates the linear relationship between observed and predicted rates in the two conditions.
+
+```{r, echo=FALSE, message=FALSE, fig.show='hold', results='hide'}
+
+lmer_rus <- lm(Rate ~ Context, data = rus_pl)
+AIC(lmer_rus)
+
+lm.beta(lmer_rus)
+
+rus_pl <- rus_pl %>% mutate(predicted_rate = predict(lmer_rus)) 
+rus_pl$residuals <- rus_pl$Rate - rus_pl$predicted_rate
+
+ggplot(rus_pl, aes(x = predicted_rate, y = Rate)) +
+  geom_point(aes(color = Context, shape = Context), size = 2, alpha = 0.6) +  # Add transparency
+  geom_smooth(method = "lm", se = TRUE, color = "black") +  # Smoothing line for 'nmax'
+  labs(title = "Observed vs. Predicted Rate for Russian bare plurals", 
+       subtitle = "The change in non-maximal vs maximal contexts",
+       x = "Predicted Rate", 
+       y = "Observed Rate") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+```
+
+## English
+
+The English experiment investigated two types of plurals: definite plurals and bare plurals. In order to determine if the rate is associated with the context (maximal vs. non-maximal) and definiteness (definite plurals vs. bare plural), a linear mixed-effects regression analysis was conducted. The syntax of the model was `Rate ~ Context * Definiteness + (1|ResponseId)`. The model showed a significant interaction between `Context` and `Definiteness`, indicating that the effect of (non-)maximality on the acceptability of English plurals depends on whether the plural NP is definite or bare. Both definite and bare plurals were rated significantly lower in the non-maximal condition than in the maximal condition, beta = -3.53, SE = 0.39, t = -8.95. In the maximal condition, both definite and bare plurals received the mean rate of 10 (SD = 0), while in the non-maximal condition, the mean rate was 6.47 (SD = 2.18) for definite plurals and 8.59 (SD = 2.21) for bare plurals. However, the effect of being in the non-maximal context is stronger for bare plurals than for definite plurals. Specifically, the difference in rates between the non-maximal and maximal conditions is 2.13 points higher for bare plurals compared to definite plurals, SE = 0.57, t = 3.76. These findings suggest that the acceptability of English plurals is influenced by both maximality and definiteness, with the effect of maximality being particularly pronounced for bare plurals.
+
+The fixed effects of the model (`Context`, `Definiteness`, and their interaction) explain 48.1% of the variance in the rates. The model included random intercepts for `ResponseId`; however, the conditional R\^2 of 0.481 suggests that individual variation across participants is not substantial. The model fit can be considered moderately good.
+
+Below is an interaction plot illustrating the effect of context (maximal vs. non-maximal) and plural type (definite vs. bare) on acceptability rates. The y-axis represents the acceptability rates predicted by the model. The plot shows significant interaction between context and plural type. In the maximal condition, both definite and bare plurals have high predicted rates with overlapping confidence intervals. In the non-maximal condition, the predicted rate for definite plurals drops significantly, whereas the predicted rate of a bare plural also decreases but remains higher than that of the definite plural. This suggests that definite plurals are more sensitive to maximality manipulations than bare plurals, as they show a stronger decline in non-maximal contexts.
+
+```{r, echo=FALSE,message=FALSE, fig.show='hold', results='hide'}
+
+lmer_english_interaction <- lmer(Rate ~ Context * Definiteness + (1|ResponseId), data = eng_pl)
+
+summary(lmer_english_interaction)
+
+
+# Compute means for each condition
+means <- aggregate(Rate ~ Context + Definiteness, data = eng_pl, FUN = mean)
+
+# Rename factor levels for clarity
+means$Context <- factor(means$Context, levels = c("max", "nmax"), labels = c("Maximal", "Non-Maximal"))
+means$Definiteness <- factor(means$Definiteness, levels = c("def", "indef"), labels = c("Definite PL", "Bare PL"))
+
+ggplot(means, aes(x = Context, y = Rate, color = Definiteness, group = Definiteness)) +
+  geom_point(size = 4) +       
+  geom_line(size = 1) +        
+  geom_errorbar(aes(
+    ymin = pmax(1, Rate - 1.96*sd(Rate)),  # Clip lower bound at 1
+    ymax = pmin(10, Rate + 1.96*sd(Rate))  # Clip upper bound at 10
+  ), width = 0.2) +  
+  scale_color_viridis_d(option = "D", end = 0.8) +  
+  scale_y_continuous(limits = c(1, 10)) +  # Ensure y-axis stays in range
+  labs(
+    title = "Interaction Plot: Context x Definiteness",
+    x = NULL,
+    y = "Predicted Rate",
+    color = ""
+  ) +
+  theme_minimal() +
+  theme(text = element_text(size = 14))
+
+
+
+```
+
+## Comparison of the two languages
+
+Finally, I combined the data from Russian and English and investigated if the three types of plural NPs - Russian bare, English bare, and English definite – differ in their ratings across conditions. Since across Russian bare plurals, English bare plurals, and English definite plurals the maximal condition was rated at 10 with a SD of 0, I excluded the maximal condition from the analysis and analyzed if the type of the plural (a categorical variable with three levels - Russian bare, English bare, and English definite) predicts the rating. Including a random intercept for participants was not possible as there were more various response IDs than observation levels. Therefore, a simple linear regression model with the syntax `Rate ~ PluralType` was fit over the combined data. 
+
+The results showed that in the non-maximal condition, English bare plurals were rated on average 2.07 points higher than Russian bare plurals, SE = 0.65, p < 0.01. However, there is no significant difference between the ratings of Russian bare plurals and English definite plurals in the non-maximal condition, p = 0.93. 
+
+The model explains about 16.2% of variance in the ratings, and the overall model was statistically significant, F(2, 77) = 7.43, p < 0.01. The Cohen's f^2 of 0.193 suggests a medium effect of the type of the plural NP on the rating in the non-maximal context. 
+
+The plot below illustrates the effect of the plural type on the rate as predicted by the model. The red diamond points are the predicted means for each plural type (Russian bare, English bare, and English definite). The shaded regions reflect confidence intervals. It is almost symmetric, which indicates that Russian bare plurals and English definite plurals are predicted to have almost the same rates by the statistical model. In contrast, English bare plurals significantly differ from Russian bare plurals and English definite plurals. 
+
+```{r, echo=FALSE, message=FALSE, fig.show='hold', results='hide'}
+
+df_nmax <- df %>% filter(Context == 'nmax')
+lmer_nmax <- lm(Rate ~ Definiteness, data = df_nmax)
+summary(lmer_nmax)
+
+
+eff <- as.data.frame(effect("Definiteness", lmer_nmax))
+
+ggplot(eff, aes(x = Definiteness, y = fit, group = 1)) + 
+  geom_line(color = "black", size = 1) +  # Dashed line style
+  geom_point(color = "red", size = 4, shape = 18) +  # Add points for better visualization
+  geom_ribbon(aes(ymin = lower, ymax = upper), fill = "lightgray", alpha = 0.3) + 
+  scale_x_discrete(labels = c('Russian bare PL', 'English bare PL', 'English definite PL')) + 
+  labs(title = "Effect of Plural Type on Predicted Rate", 
+       x = NULL, 
+       y = "Predicted Rate") + 
+  theme_minimal() +
+  theme(
+    axis.text = element_text(size = 12),  
+    axis.title = element_text(size = 14), 
+    plot.title = element_text(hjust = 0.5, size = 16)
+  ) +
+  ylim(0,10)
+
+```

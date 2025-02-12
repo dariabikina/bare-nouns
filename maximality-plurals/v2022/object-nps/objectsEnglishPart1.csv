@@ -1,0 +1,125 @@
+StartDate,EndDate,Status,IPAddress,Progress,Duration (in seconds),Finished,RecordedDate,ResponseId,RecipientLastName,RecipientFirstName,RecipientEmail,ExternalReference,LocationLatitude,LocationLongitude,DistributionChannel,UserLanguage,f1_good_1,exp1_prom_sg_indef_1,f2_bad_1,exp2_uniq_sg_def_1,f3_good _1,exp3_max_pl_indef_1,f4_good_1,exp4_nmax_pl_def_1,f5_good_1,exp5_nprom_sg_indef_1,f6_good_1,exp6_nprom_sg_def_1,f7_bad_1,exp8_uniq_sg_indef_1,f8_bad_1,exp9_max_pl_def_1,f10_bad_1,exp10_prom_sg_def_1,Q33,Q34,Q17
+Start Date,End Date,Response Type,IP Address,Progress,Duration (in seconds),Finished,Recorded Date,Response ID,Recipient Last Name,Recipient First Name,Recipient Email,External Data Reference,Location Latitude,Location Longitude,Distribution Channel,User Language,"Where did the woman put the chair?  
+
+
+
+
+The woman put the chair near the table. - How much do you agree with this answer?","What did the woman put on the table?
+
+
+
+
+The woman put a bag on the table. - How much do you agree with this answer?","Where did the girl put the chair?
+
+
+
+
+The girl put the chair at the table. - How much do you agree with this answer?","What did the woman put on the table? 
+
+
+
+
+The woman put the bag on the table. - How much do you agree with this answer?","What did the woman do with the bottle? ​​​
+
+
+
+
+The woman put the bottle on the table. - How much do you agree with this answer?","What did the woman put on the table? 
+
+
+
+
+The woman put bags on the table. - How much did you agree with this answer?","Where did the woman put the chair? 
+
+
+
+
+The woman put the chair near the table. - How much do you agree with this answer?","What did the woman put on the table? 
+
+
+
+
+The woman put the bags on the table. - How much do you agree with this answer?","Where did the woman sit? 
+
+
+
+
+The woman sat near the table. - How much do you agree with this answer?","What did the woman put on the table? 
+
+
+
+
+The woman put a bag on the table. - How much do you agree with this answer?","Where did the woman sit? 
+
+
+
+
+The woman sat near the table. - How much do you agree with this answer?","What did the woman put on the table?
+
+
+
+
+The woman put the bag on the table. - How much do you agree with this answer?","What did the woman do with the bottle?
+
+
+
+
+The woman put the bottle on the table. - How much do you agree with this answer?","What did the woman put on the table?
+
+
+
+
+The woman put a bag on the table. - How much do you agree with this answer?","Where did the woman put the chair?
+
+
+
+
+The woman put the chair by the table. - How much do you agree with this answer?","What did the woman put on the table?
+
+
+
+
+The woman put the bags on the table. - How much do you agree with this answer?","What did the woman do with the bottle?
+
+
+
+
+
+The woman moved the bottle on the table. - How much do you agree with this answer?","What did the woman put on the table?
+
+
+
+
+The woman put the bag on the table. - How much do you agree with this answer?",Is English your only native language?,"If you answered no in the previous question, what other languages do you speak natively? (By speaking natively we mean ""I learned this language as a child and have used it in your family."")",We're more than happy to hear your feedback on this experiment -- please share it below!
+"{""ImportId"":""startDate"",""timeZone"":""America/Denver""}","{""ImportId"":""endDate"",""timeZone"":""America/Denver""}","{""ImportId"":""status""}","{""ImportId"":""ipAddress""}","{""ImportId"":""progress""}","{""ImportId"":""duration""}","{""ImportId"":""finished""}","{""ImportId"":""recordedDate"",""timeZone"":""America/Denver""}","{""ImportId"":""_recordId""}","{""ImportId"":""recipientLastName""}","{""ImportId"":""recipientFirstName""}","{""ImportId"":""recipientEmail""}","{""ImportId"":""externalDataReference""}","{""ImportId"":""locationLatitude""}","{""ImportId"":""locationLongitude""}","{""ImportId"":""distributionChannel""}","{""ImportId"":""userLanguage""}","{""ImportId"":""QID18_1""}","{""ImportId"":""QID20_1""}","{""ImportId"":""QID21_1""}","{""ImportId"":""QID23_1""}","{""ImportId"":""QID24_1""}","{""ImportId"":""QID25_1""}","{""ImportId"":""QID26_1""}","{""ImportId"":""QID27_1""}","{""ImportId"":""QID28_1""}","{""ImportId"":""QID29_1""}","{""ImportId"":""QID30_1""}","{""ImportId"":""QID31_1""}","{""ImportId"":""QID32_1""}","{""ImportId"":""QID33_1""}","{""ImportId"":""QID34_1""}","{""ImportId"":""QID35_1""}","{""ImportId"":""QID36_1""}","{""ImportId"":""QID37_1""}","{""ImportId"":""QID15""}","{""ImportId"":""QID16_TEXT""}","{""ImportId"":""QID17_TEXT""}"
+2022-11-21 12:57:02,2022-11-21 13:01:47,0,69.212.103.199,100,284,1,2022-11-21 13:01:48,R_wZsTf4GlLWndMMp,,,,,32.339,-97.4163,anonymous,EN,10,10,1,10,10,10,10,5,10,8,10,7,3,10,10,10,1,10,1,,
+2022-11-21 12:45:13,2022-11-21 13:02:38,0,69.76.169.15,100,1044,1,2022-11-21 13:02:38,R_2A076wtMgBvEY3e,,,,,38.9909,-94.5525,anonymous,EN,10,10,0,10,10,10,0,5,7,9,7,10,10,10,10,10,0,10,1,,
+2022-11-21 13:02:12,2022-11-21 13:09:10,0,174.49.31.101,100,417,1,2022-11-21 13:09:10,R_2XoIgO8YhtjBgZG,,,,,35.9698,-86.5061,anonymous,EN,9,10,4,10,10,10,10,6,7,6,9,9,2,10,8,10,2,7,1,,
+2022-11-21 13:05:16,2022-11-21 13:12:00,0,68.42.140.176,100,403,1,2022-11-21 13:12:00,R_3GCFGd4XYQAXv0K,,,,,42.4036,-86.2521,anonymous,EN,10,10,2,10,10,10,10,6,10,10,10,9,2,10,8,10,0,10,1,,
+2022-11-21 13:09:52,2022-11-21 13:13:24,0,68.44.112.44,100,211,1,2022-11-21 13:13:24,R_2rqZvWZbn5WodnL,,,,,40.5025,-86.1462,anonymous,EN,10,10,3,10,9,10,3,10,3,10,4,10,5,10,9,10,5,10,1,,
+2022-11-21 13:10:36,2022-11-21 13:14:45,0,76.156.172.168,100,248,1,2022-11-21 13:14:46,R_1JLYXftCRs30bD8,,,,,37.751,-97.822,anonymous,EN,8,10,3,10,10,10,10,9,10,10,10,7,3,10,10,10,8,10,1,,
+2022-11-21 13:13:11,2022-11-21 13:16:55,0,71.88.212.132,100,224,1,2022-11-21 13:16:56,R_3FVyJDosQtbzACR,,,,,35.6598,-83.9867,anonymous,EN,10,10,0,10,10,10,10,7,10,10,10,7,3,10,10,10,0,10,1,,
+2022-11-21 13:16:09,2022-11-21 13:20:23,0,172.58.158.35,100,254,1,2022-11-21 13:20:24,R_3EooDQWtS24X2Wo,,,,,35.2296,-80.843,anonymous,EN,10,10,1,10,10,10,10,5,10,10,10,10,0,10,10,10,0,10,1,,
+2022-11-21 13:18:06,2022-11-21 13:23:25,0,174.102.120.221,100,318,1,2022-11-21 13:23:26,R_1GCaE0vhX0CM35j,,,,,39.3202,-84.552,anonymous,EN,10,10,0,10,10,10,10,10,10,10,10,10,7,10,6,10,0,10,1,,
+2022-11-21 13:18:02,2022-11-21 13:23:41,0,70.178.72.40,100,338,1,2022-11-21 13:23:41,R_1KkDrWWuSqLuc6C,,,,,36.2467,-93.1054,anonymous,EN,10,10,7,10,10,10,10,6,10,10,10,9,10,10,10,10,4,10,1,,
+2022-11-21 13:09:03,2022-11-21 13:24:30,0,174.249.224.6,100,926,1,2022-11-21 13:24:30,R_O7GME2TdUVn4YbT,,,,,37.751,-97.822,anonymous,EN,10,10,6,10,10,10,8,6,10,10,9,9,0,10,10,10,0,10,1,,
+2022-11-21 13:19:41,2022-11-21 13:25:31,0,69.1.23.182,100,349,1,2022-11-21 13:25:31,R_9tNVYBwWhw4TSk9,,,,,32.8445,-79.8242,anonymous,EN,4,10,2,10,10,10,8,2,8,10,8,9,3,10,3,10,0,10,1,,
+2022-11-21 13:18:54,2022-11-21 13:26:12,0,47.135.18.234,100,437,1,2022-11-21 13:26:13,R_2U467Tk1ncdarqq,,,,,35.7532,-81.3264,anonymous,EN,10,10,0,10,10,10,5,5,10,10,10,5,0,10,10,10,0,10,1,,n/a
+2022-11-21 13:16:02,2022-11-21 13:28:43,0,66.42.248.19,100,760,1,2022-11-21 13:28:43,R_2E4esPQ8SJtjgSh,,,,,39.4272,-84.1664,anonymous,EN,10,10,4,10,10,10,10,7,10,10,10,7,3,10,10,10,1,10,1,,
+2022-11-21 13:18:06,2022-11-21 13:29:32,0,65.32.204.43,100,686,1,2022-11-21 13:29:33,R_UA5zFmyLiJFq6lP,,,,,27.4674,-82.511,anonymous,EN,10,10,10,10,10,10,10,6,4,6,6,6,1,10,10,10,4,10,1,,
+2022-11-21 13:24:02,2022-11-21 13:31:55,0,162.191.155.242,100,473,1,2022-11-21 13:31:56,R_BMqaitEzVXdgiqZ,,,,,36.1287,-79.4086,anonymous,EN,10,10,0,10,10,10,10,2,10,10,10,10,10,10,10,10,0,10,1,,This was interesting to think of the minor details that change a meaning
+2022-11-21 13:30:14,2022-11-21 13:36:00,0,71.150.144.233,100,346,1,2022-11-21 13:36:01,R_xt4P8z1NKKHplND,,,,,35.1893,-80.8358,anonymous,EN,10,10,1,10,10,10,10,8,10,10,10,10,0,10,10,10,0,10,1,,
+2022-11-21 13:30:52,2022-11-21 13:36:12,0,174.240.160.6,100,320,1,2022-11-21 13:36:13,R_3qJbahvROVMfZ1S,,,,,33.4475,-112.0866,anonymous,EN,10,10,0,10,10,10,10,10,10,10,10,10,10,10,10,10,5,10,1,,
+2022-11-21 13:32:04,2022-11-21 13:36:40,0,98.170.249.72,100,276,1,2022-11-21 13:36:40,R_Z3hTVPbdvCdoMWB,,,,,30.4553,-86.6285,anonymous,EN,0,0,0,0,10,10,10,5,10,5,10,5,0,10,10,10,0,10,1,n/a,Good Luck with the research!
+2022-11-21 13:30:21,2022-11-21 13:38:45,0,98.212.250.225,100,503,1,2022-11-21 13:38:45,R_3ha3YNQp0QKB7aJ,,,,,40.1412,-87.6264,anonymous,EN,10,10,3,10,10,10,10,7,10,10,10,10,3,10,10,10,8,10,1,,
+2022-11-21 13:37:01,2022-11-21 13:42:33,0,99.100.194.138,100,331,1,2022-11-21 13:42:33,R_b2EkKasgvNvDrfr,,,,,38.4073,-90.4368,anonymous,EN,10,10,7,10,10,10,9,6,10,10,10,9,8,10,10,10,6,10,1,,thanks!
+2022-11-21 13:38:53,2022-11-21 13:43:54,0,107.77.198.139,100,300,1,2022-11-21 13:43:54,R_sp8aafiDqXblo65,,,,,32.7797,-96.8022,anonymous,EN,10,10,0,10,10,10,10,10,10,10,10,10,8,10,9,10,0,10,1,,
+2022-11-21 13:39:14,2022-11-21 13:44:08,0,73.221.108.22,100,293,1,2022-11-21 13:44:08,R_6rFG1g8C7i5sG7T,,,,,48.799,-122.4499,anonymous,EN,9,10,4,10,10,10,10,4,9,10,10,7,2,10,8,10,0,6,1,,
+2022-11-21 13:38:07,2022-11-21 13:44:14,0,73.54.88.15,100,366,1,2022-11-21 13:44:14,R_2QoFJwnpQa9FtQz,,,,,26.6932,-81.9129,anonymous,EN,9,10,5,10,10,10,10,7,10,10,10,10,9,10,10,10,3,10,1,none,
+2022-11-21 13:38:58,2022-11-21 13:44:23,0,68.50.100.29,100,325,1,2022-11-21 13:44:24,R_2bQbQHJrbk0UFRZ,,,,,39.5992,-86.13,anonymous,EN,10,10,1,10,10,10,9,5,9,10,9,5,1,10,10,10,0,10,1,,
+2022-11-21 13:36:31,2022-11-21 13:44:43,0,99.16.252.178,100,491,1,2022-11-21 13:44:43,R_se9dHRDnOroOaUV,,,,,33.5231,-84.3579,anonymous,EN,10,0,10,0,0,10,10,10,10,10,10,10,10,10,2,10,0,10,1,,"While answering the questions, I quickly realized that this survey is what I would call ""attention to detail"". Overall interesting survey."
+2022-11-21 13:40:22,2022-11-21 13:45:56,0,68.105.175.19,100,333,1,2022-11-21 13:45:57,R_3DEjExfgc5OmYw1,,,,,29.6959,-82.4042,anonymous,EN,10,10,7,10,10,10,10,6,10,10,10,10,0,10,7,10,0,10,1,,
+2022-11-21 13:40:06,2022-11-21 13:47:35,0,73.86.97.68,100,448,1,2022-11-21 13:47:35,R_3Nx5C2bYjyGgtcD,,,,,38.3642,-76.4378,anonymous,EN,10,10,0,10,10,10,10,5,10,10,10,8,2,10,10,10,0,10,1,,
+2022-11-21 13:39:52,2022-11-21 13:51:28,0,70.135.147.46,100,696,1,2022-11-21 13:51:29,R_1LpcfJ6Zv7VjfbT,,,,,38.5848,-90.2996,anonymous,EN,10,10,5,10,10,10,4,8,7,7,7,7,3,10,10,10,1,10,1,,I enjoyed this task!
+2022-11-21 13:21:48,2022-11-21 13:51:43,0,64.189.105.176,100,1795,1,2022-11-21 13:51:44,R_eb2w5E3cunRC1vX,,,,,29.6924,-95.513,anonymous,EN,10,10,10,10,10,10,10,6,10,7,10,7,3,10,10,10,10,10,1,,
+2022-11-21 12:20:58,2022-11-21 12:21:10,0,65.112.8.56,8,11,0,2022-11-28 12:21:13,R_2bJde2KBsg7z8pB,,,,,,,anonymous,EN,,,,,,,,,,,,,,,,,,,,,
